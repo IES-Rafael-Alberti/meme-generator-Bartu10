@@ -12,7 +12,8 @@
     if($data["success"]) {
     foreach($data["data"]["memes"] as $meme) {
         //show meme image
-        echo "<img width='100px' src='" . $meme["url"] . "'>";
+        echo "<a href='editarmeme.php?id=".$meme['id']."'><img width='100px' src='" . $meme["url"] . "'></a>";
+        $cajas=$meme["box_count"];
     }
 }
     ?>

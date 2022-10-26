@@ -11,8 +11,8 @@ require("conect.php");
     <title>Menu</title>
 </head>
 <body>
-<a href="login.php">Cambiar Usuario</a>
-<a href='crearmeme.php'>crearmeme</a>
+<p><a href="login.php">Cambiar Usuario</a></p>
+<a href='lista_meme.php'>Crear Meme</a>
 
 </body>
 </html>
