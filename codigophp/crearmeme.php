@@ -1,5 +1,6 @@
 <?php
 require("testlogin.php");
+require("conect.php");
 
 $id=$_POST['idMeme'];
 $cajas=$_POST['cajas'];
@@ -9,31 +10,18 @@ $cajas=$_POST['cajas'];
     $url = 'https://api.imgflip.com/caption_image';
     $boxes=array();
  //The data you want to send via POST
-      for($x=1;$x<=$cajas;$x++){
-      $datoForm=$_POST["texto$x"];
+      for($z=1;$z<=$cajas;$z++){
+      $datoForm=$_POST["texto$z"];
+      $colorForm="#000000";
       array_push($boxes,array("text" => $datoForm,
-      "color" => "#ff8484"));
+      "color" => $colorForm));
       }
  $fields = array(
          "template_id" => $id,
          "username" => "fjortegan",
          "password" => "pestillo",
          "boxes" =>$boxes
-         );
-/*$fields = array(
-         "template_id" => "112126428",
-         "username" => "fjortegan",
-         "password" => "pestillo",
-         "boxes" => array( 
-             array("text" => "Frontend",
-                   "color" => "#ff8484"),
-             array("text" => "Alumno DAW",
-                   "color" => "#D6FFF6"),
-             array("text" => "Backend",
-                   "color" => "#2374ab")
-         ));
- */
- 
+         ); 
  //url-ify the data for the POST
  $fields_string = http_build_query($fields);
  
@@ -56,12 +44,28 @@ $cajas=$_POST['cajas'];
  
  //if success show image
  if($data["success"]) {
-      //CUIDADO CON LOS ESPACIOS
-     //echo "<img src=".$data["data"]["url"].">";
-     echo "<img src='".$data["data"]["url"]."'>";
+      $nombre = $_SESSION["nombre"];
+      $nombrememe = $nombre . "_" . date("dmyhis").".jpg";
+     file_put_contents("memes/$nombrememe", file_get_contents($data["data"]["url"]));
+     $url=$data["data"]["url"];
+     //echo "<img src='".$url."'>";
+
+      $resultado = $conn->query("SELECT id FROM Usuarios WHERE nombre = '$nombre'");
+      $filapersona = $resultado->fetch();
+
+
+     $sql = "INSERT INTO MEMES(foto,id_usuario) VALUES (:foto,:id_usuario)";
+     
+     
+     $datos = array("foto" => "memes/$nombrememe",
+     "id_usuario" => $filapersona["id"]
+    );
+      
+      $stmt = $conn->prepare($sql);
+// ejecuta la sentencia usando los valores
+      $stmt->execute($datos);
+ 
+      header("Location: index.php");
+      exit(0);
+}
  }
- }
-
-
-
-?>

@@ -1,8 +1,3 @@
-<?php
-require("recibirjson.php");
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,36 +7,24 @@ require("recibirjson.php");
     <title>Document</title>
 </head>
 <body>
-    <form action="generarmeme.php" method="post">
+    <form action="crearmeme.php" method="post">
         <input type="text" name="idMeme" hidden value="<?php echo $_GET["id"];?>">
         <input type="text" name="cajas" hidden value="<?php echo $_GET["cajas"];?>">
         <?php
-            require("recibirjson.php");
-            if($data["success"]) {
-                //iterates over memes array
-                $x=1;
-                $id=$_GET["id"];
-                foreach($data["data"]["memes"] as $meme) {
-                    //show meme image
-
-                    if($meme["id"]==$id){
-                        $vmeme = $meme["url"];
-                        echo "<a href='editarMeme.php?id=".$id."'><img  width='200px' src='" . $meme["url"] . "'></a><p>";
-                        $array=array();
-                        while($x<=$meme["box_count"]){
-                            echo "<label for='text'>Texto$x</label>";
-                            echo "<input type='text' name='text$x' id='text$x'>";
-                            echo "<br>";
-                            $x++;
-                            array_push($array, "texto.$x");
-                        }
-                    }
+            $id=$_GET["id"];
+            $cajas=$_GET["cajas"];
+            $url=$_GET["url"];
+            $i=1;
+                echo "<img width='150px' src='".$url."'>";
+                while($i<=$cajas){
+                    echo "</br><label for='texto$i'>Texto $i</label> ";
+                    echo "<input type='text2' name='texto$i' id='texto$i'> ";
+                    echo "<br>";
+                    $i++;
                 }
-                print("<a href='crearmeme.php?url=$vmeme'>mostrar meme</a>");
-            }
-
         ?>
-        
+        </br>        
+        <input type="submit" value="CREAR MEME">
     </form>
 </body>
 </html>
