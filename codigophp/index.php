@@ -10,10 +10,33 @@ require("conect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+
+body{
+    background-color: beige;
+    color: burlywood;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color:peru;
+}
+
+h3{
+    color:green;
+    
+
+}
+
+</style>
+
+
 </head>
 <body>
-<p><a href="login.php">Cambiar Usuario</a></p>
-<a href='lista_meme.php'>Crear Meme</a>
+    <h3>Usuario: <?php echo($_SESSION["nombre"])?></h3>
+<h2><a href="login.php">Cambiar Usuario</a></h2>
+<h2><a href='lista_meme.php'>Crear Meme</a></h2>
 
 <?php
 

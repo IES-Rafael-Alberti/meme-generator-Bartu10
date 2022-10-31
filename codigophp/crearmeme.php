@@ -12,9 +12,8 @@ $cajas=$_POST['cajas'];
  //The data you want to send via POST
       for($z=1;$z<=$cajas;$z++){
       $datoForm=$_POST["texto$z"];
-      $colorForm="#000000";
-      array_push($boxes,array("text" => $datoForm,
-      "color" => $colorForm));
+
+      array_push($boxes,array("text" => $datoForm));
       }
  $fields = array(
          "template_id" => $id,
